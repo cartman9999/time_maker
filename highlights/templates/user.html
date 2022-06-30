@@ -1,0 +1,32 @@
+{%  extends 'highlights/main.html' %}
+{% block content %}
+
+<br>
+<h3>Perfil:</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %} 
+                <div class="alert alert-danger">
+                    <strong>{{ field.label }}:  {{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <input type="hidden" name="id_user" value={{ request.user.id }}>
+
+    {% for form in form %}
+        {{ form.label }}
+        <br>
+        {{form}}
+        <hr>
+    {% endfor %}
+    
+    <input type="submit" name="Submit">
+</form>
+
+{% endblock content %}

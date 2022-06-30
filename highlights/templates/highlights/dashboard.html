@@ -1,0 +1,66 @@
+{%  extends 'highlights/main.html' %}
+
+{% block content %}
+
+{%  include 'highlights/status.html' %}
+
+<br>
+
+<div class="row">
+	<div class="col-md-5">
+		<h5>Highlights:</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_highlight' %}">Crear Highlight</a>
+			<table class="table table-sm">
+				<tr>
+					<th></th>
+					<th>Nombre</th>
+					<th>Completado</th>
+				</tr>
+
+				{% for highlight in highlights %}
+					<tr>
+						<td><a class="btn btn-sm btn-info" href="{% url 'highlight' highlight.id%}">Ver</a></td>
+						<td>{{ highlight.name }}</td>
+						<td>{{ highlight.completed }}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>Recientes:</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Highlight</th>
+					<th>Inicio</th>
+					<th>Fin</th>
+					<th>Completado</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+				{% for highlight in highlights %}
+					<tr>
+						<td>{{ highlight.name }}</td>
+						<td>{{ highlight.start }}</td>
+						<td>{{highlight.start}}</td>
+						<td>{{highlight.end}}</td>
+						<td>{{highlight.completed}}</td>
+						<td><a class="btn btn-sm btn-warning" href="{% url 'update_highlight' highlight.id%}">Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_highlight' highlight.id%}">Delete</a></td>
+
+					</tr>
+				{% endfor %}
+		
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{%  extends 'highlights/main.html' %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Nombre</th>
+					<th>Inicio</th>
+					<th>Fin</th>
+					<th>Completado</th>
+					<th>Táctica(s)</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+
+				<tr>
+					<td>{{ highlight.name }}</td>
+					<td>{{ highlight.start }}</td>
+					<td>{{ highlight.end }}</td>
+					<td>{{ highlight.completed }}</td>
+					<td>
+						{% for tactic in highlight.tactic.all %}
+							{{ tactic.name }}
+							<br>
+						{% endfor %}
+					</td>
+					<td><a class="btn btn-sm btn-info" href="{% url 'update_highlight' highlight.id %}">Update</a></td>
+
+					<td><a class="btn btn-sm btn-danger" href="{% url 'delete_highlight' highlight.id %}">Delete</a></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
